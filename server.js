@@ -19,7 +19,7 @@ mongoose.connect('mongodb://localhost/movie-times', err => {
     console.log('successfully connecting to mongodb cars db')
   }
 })
-
+app.use(express.static(__dirname + '/public'))
 // using 3rd party middleware
 app.use(logger('dev'))
 // use the body-parser middleware to access req.body
