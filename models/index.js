@@ -17,15 +17,24 @@ let movieSchema = new Schema({
 })
 movieSchema.methods.upcaseRating = function (next) {
   console.log('using upcaseRating', this)
+
   return this.rating
 }
-// AnimalSchema.statics.search = function search (name, cb) {
-//   return this.where('name', new RegExp(name, 'i')).exec(cb)
-// }
 
 movieSchema.statics.search = function (query, cb) {
   console.log(query)
-  return this.where('rating', query.rating).exec(cb)
+  let searchObj = {}
+  if (query.genre) searchObj = {...searchObj, genre: { $in: [query.genre] } }
+  if (query.rating) searchObj = {...searchObj, rating: query.rating }
+  if (query.runtime) searchObj = {...searchObj, runtime: { $gte: query.runtime } }
+
+    // genre and runtime
+  return this.find(searchObj)
+          .exec(cb)
+            // this.where('rating', query.rating)
+            //  .where('genre').in([query.genre])
+            //  .where('runtime').gte(query.runtime)
+            //  .exec(cb)
 }
 
 movieSchema.pre('save', function (next) {
