@@ -7,4 +7,6 @@ MoviesRouter.route('/movies/:id')
   .get(moviesController.getSingle)
   .put(moviesController.update)
   .delete(moviesController.destroy)
+MoviesRouter.route('/search')
+  .get(moviesController.search)
 module.exports = MoviesRouter

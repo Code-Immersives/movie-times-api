@@ -1,10 +1,19 @@
 const db = require('../models')
 
 module.exports = {
+  search: function (req, res) {
+    let query = req.query
+    db.Movie.search(query, (err, movies) => {
+      if (err) res.json(err)
+      if (!err) res.json(movies)
+    })
+  },
   getAll: function (req, res) {
+    db.Movie.search('title=starwars')
     db.Movie.find({})
       .populate('cinemas')
       .exec((err, movies) => {
+        movies[0].upcaseRating()
         if (err) res.json({message: err, status: 204})
         res.json(movies)
       })
@@ -12,11 +21,13 @@ module.exports = {
   getSingle: function (req, res) {
     db.Movie.find({_id: req.params.id }, (err, movie) => {
       if (err) res.json({message: err, status: 204})
+      // movie.upcaseRating
       if (!err) res.json(movie)
     })
   },
   create: function (req, res) {
     let newMovie = new db.Movie(req.body)
+    console.log('creating a movie', newMovie)
     newMovie.save((err, movie) => {
       if (err) res.json({message: err, status: 302})
       res.json(movie)
