@@ -26,8 +26,10 @@ app.use(logger('dev'))
 // parse application/json
 app.use(bodyParser.json())
 // make routes availble to client
-const moviesRouter = require('./routes')
+const moviesRouter = require('./routes').MovieRouter
+const cinemasRouter = require('./routes').CinemaRouter
 app.use('/api/v1', moviesRouter)
+app.use('/api/v1', cinemasRouter)
 // run your server to listen on a given port
 
 app.listen(port, (err) => {
