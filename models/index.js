@@ -13,7 +13,7 @@ let movieSchema = new Schema({
   },
   release_date: {type: Date, default: Date.now()},
   poster: String,
-  cinemas: [{ type: Schema.Types.ObjectId, ref: 'Cinema' }]
+  cinemas: [{ type: Schema.Types.ObjectId, ref: 'Cinema' }] // associations/relationships
 })
 movieSchema.methods.upcaseRating = function (next) {
   console.log('using upcaseRating', this)
@@ -28,7 +28,7 @@ movieSchema.statics.search = function (query, cb) {
   if (query.rating) searchObj = {...searchObj, rating: query.rating }
   if (query.runtime) searchObj = {...searchObj, runtime: { $gte: query.runtime } }
 
-    // genre and runtime
+    // genre and runtime { rating: query.rating, genre: { $in: [query.genre] },  { $gte: query.runtime } }
   return this.find(searchObj)
           .exec(cb)
             // this.where('rating', query.rating)

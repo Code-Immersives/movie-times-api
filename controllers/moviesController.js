@@ -2,7 +2,7 @@ const db = require('../models')
 
 module.exports = {
   search: function (req, res) {
-    let query = req.query
+    let query = req.query // {rating: 'PG13'}
     db.Movie.search(query, (err, movies) => {
       if (err) res.json(err)
       if (!err) res.json(movies)
