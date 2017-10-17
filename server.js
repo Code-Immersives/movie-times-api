@@ -16,7 +16,7 @@ mongoose.connect('mongodb://localhost/movie-times', err => {
   if (err) {
     console.log('error connecting to mongodb:', err)
   } else {
-    console.log('successfully connecting to mongodb cars db')
+    console.log('successfully connecting to mongodb movie time db')
   }
 })
 app.use(express.static(__dirname + '/public'))
@@ -28,8 +28,10 @@ app.use(bodyParser.json())
 // make routes availble to client
 const moviesRouter = require('./routes').MovieRouter
 const cinemasRouter = require('./routes').CinemaRouter
+const usersRouter = require('./routes').UserRouter
 app.use('/api/v1', moviesRouter)
 app.use('/api/v1', cinemasRouter)
+app.use('/api/v1', usersRouter)
 // run your server to listen on a given port
 
 app.listen(port, (err) => {
