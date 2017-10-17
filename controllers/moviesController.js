@@ -9,6 +9,7 @@ module.exports = {
     })
   },
   getAll: function (req, res) {
+    console.log('decoded token info', req.decoded)
     db.Movie.search('title=starwars')
     db.Movie.find({})
       .populate('cinemas')

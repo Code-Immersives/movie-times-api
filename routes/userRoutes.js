@@ -1,14 +1,11 @@
 const UsersRouter = require('express').Router()
 // const usersController = require('../controllers').usersController
 const User = require('../models').User
-
-// function Person(name, email){
-//   this.name = name
-//   this.email = email
-// }
-//
-// let Tony = new Person('tony', 'email')
-
+const jwt = require('jsonwebtoken')
+const SECRET = require('../config').SECRET || 'testCODE'
+const createToken = ({email, lastName}) => {
+  return jwt.sign({ email, lastName }, SECRET, { expiresIn: '1h' })
+}
 UsersRouter.route('/signup')
   .post((req, res) => {
     let newUser = new User(req.body)
@@ -29,9 +26,15 @@ UsersRouter.route('/login')
       .exec((err, user) => {
         if (err) {
           res.json(err)
-        } else {
+        } else if (user) {
           let dbResponse = user.verifyPW(password)
-          res.json(dbResponse)
+          if (dbResponse.valid) {
+            res.json({...dbResponse, token: createToken(user)})
+          } else {
+            res.json(dbResponse)
+          }
+        } else {
+          res.json({message: 'no user found'})
         }
       })
   })

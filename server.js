@@ -29,9 +29,9 @@ app.use(bodyParser.json())
 const moviesRouter = require('./routes').MovieRouter
 const cinemasRouter = require('./routes').CinemaRouter
 const usersRouter = require('./routes').UserRouter
+app.use('/api/v1', usersRouter)
 app.use('/api/v1', moviesRouter)
 app.use('/api/v1', cinemasRouter)
-app.use('/api/v1', usersRouter)
 // run your server to listen on a given port
 
 app.listen(port, (err) => {
