@@ -9,7 +9,7 @@
 ## Authentication & Authorization
 - User setup
   1. Create User model [x]
-  2. Create User routes 
+  2. Create User routes
   3. Create User controller
 - Encryption (Bcrypt)
   1. Hash password
@@ -21,3 +21,6 @@
   3. Send token on login routes
   4. Add authorization middleware to specific routes
   5. Decode the token
+
+### October 18 2017 Lesson Plan
+## 

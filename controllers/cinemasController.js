@@ -5,6 +5,17 @@ const db = require('../models')
 //   if (err) res.json(err)
 //   if (!err) res.json(cinemas)
 // }
+// class cinemasController {
+//   static getAll (req, res) {
+//
+//   }
+//   static getSingle (req, res) {
+//
+//   }
+//   static search (req, res) {
+//
+//   }
+// }
 
 module.exports = {
   getAll: function (req, res) {

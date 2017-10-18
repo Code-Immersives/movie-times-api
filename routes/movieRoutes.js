@@ -23,7 +23,7 @@ const authenticate = (req, res, next) => {
 }
 
 MoviesRouter.route('/movies')
-  .get(authenticate, moviesController.getAll)
+  .get(moviesController.getAll)
   .post(moviesController.create)
 MoviesRouter.use(authenticate)
 MoviesRouter.route('/movies/:id')
