@@ -1,4 +1,3 @@
-console.log('working mo fo')
 let movieDiv = document.getElementById('movie')
 const createMovieCards = (movie) => (
   `
@@ -32,3 +31,57 @@ fetch('/api/v1/movies')
     let movieCardsHtml = movies.map(createMovieCards)
     movieDiv.innerHTML = movieCardsHtml.join('')
   })
+
+// Create a SignUp class
+class SignUp {
+  static handleSubmit () {
+    let fields = document.getElementsByClassName('field')
+    let newUser = {}
+    for (let i = 0; i < fields.length; i++) {
+      newUser[fields[i].lastElementChild.name] = fields[i].lastElementChild.value
+    }
+    fetch('/api/v1/signup', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(newUser)
+
+    })
+    .then(res => res.json())
+    .then(user => console.log(user))
+    .catch(err => console.log(err))
+  }
+  static createForm () {
+    return `
+    <div class="ui center equal width form">
+      <div class="fields">
+        <div class="field">
+          <label>E-mail</label>
+          <input name="email" type="text" placeholder="Email">
+        </div>
+        <div class="field">
+          <label>Password</label>
+          <input name="password" type="password">
+        </div>
+      </div>
+      <div class="fields">
+        <div class="field">
+          <label>First name</label>
+          <input name="firstName" type="text" placeholder="First Name">
+        </div>
+        <div class="field">
+          <label>Last name</label>
+          <input name="lastName" type="text" placeholder="Last Name">
+        </div>
+      </div>
+      <div class="ui submit button">Submit</div>
+      </div>
+    `
+  }
+
+  static render () {
+    movieDiv.innerHTML = SignUp.createForm()
+    document.querySelector('.submit').addEventListener('click', SignUp.handleSubmit)
+  }
+}
