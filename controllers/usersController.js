@@ -1,11 +1,7 @@
 // create a user controller class that has 2 static methods
 const User = require('../models').User
-const jwt = require('jsonwebtoken')
-const SECRET = require('../config').SECRET || 'testCODE'
-const createToken = ({email, lastName}) => {
-  conosle.log(email)
-  return jwt.sign({ email, lastName }, SECRET, { expiresIn: '1h' })
-}
+const Auth = require('../utils/authentication')
+
 class UsersController {
   static signUp (req, res) {
     let newUser = new User(req.body)
@@ -28,7 +24,7 @@ class UsersController {
         } else if (user) {
           let dbResponse = user.verifyPW(password)
           if (dbResponse.valid) {
-            res.json({...dbResponse, token: createToken(user)})
+            res.json({...dbResponse, token: Auth.createToken(user)})
           } else {
             res.json(dbResponse)
           }
