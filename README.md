@@ -35,3 +35,16 @@
 - Client-Side Auth
   1. Create SignUp page and LogIn page
   2. Make a auth adapter to add the token to a fetch request
+
+### October 19 2017 Lesson Plan
+- Full Review
+  1. MVC in Node/ExpressJSx
+  2. routes
+  3. middleware
+  4. request , response
+  5. controllers
+  6. models
+  7. model methods
+  8. validations
+  9. Encryption
+  10. Authentication
