@@ -33,6 +33,13 @@ class UsersController {
         }
       })
   }
+  objectLevelfunc () {
+    conosle.log('hello from object')
+  }
 }
+
+// UsersController.logIn()
+// let mycontroller = new UsersController()
+// mycontroller.objectLevelfunc()
 
 module.exports = UsersController

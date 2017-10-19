@@ -21,6 +21,7 @@ class Auth {
     }
   }
   static createToken ({email, lastName}) {
+    // "aaaaa.bbbbb.ccccc"
     return jwt.sign({ email, lastName }, SECRET, { expiresIn: '1h' })
   }
 }
