@@ -85,3 +85,51 @@ class SignUp {
     document.querySelector('.submit').addEventListener('click', SignUp.handleSubmit)
   }
 }
+
+// Create a LogIn class
+class LogIn {
+  static handleSubmit () {
+    let fields = document.getElementsByClassName('field')
+    let loggedInUser = {}
+    for (let i = 0; i < fields.length; i++) {
+      loggedInUser[fields[i].lastElementChild.name] = fields[i].lastElementChild.value
+    }
+    fetch('/api/v1/login', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(loggedInUser)
+
+    })
+    .then(res => res.json())
+    .then(serverResponse => {
+      if (serverResponse.valid) {
+        localStorage.setItem('token', serverResponse.token)
+      }
+    })
+    .catch(err => console.log(err))
+  }
+  static createForm () {
+    return `
+    <div class="ui center equal width form">
+      <div class="fields">
+        <div class="field">
+          <label>E-mail</label>
+          <input name="email" type="text" placeholder="Email">
+        </div>
+        <div class="field">
+          <label>Password</label>
+          <input name="password" type="password">
+        </div>
+        <div class="ui submit login button">Log In</div>
+      </div>
+      </div>
+    `
+  }
+
+  static render () {
+    movieDiv.innerHTML = LogIn.createForm()
+    document.querySelector('.login').addEventListener('click', LogIn.handleSubmit)
+  }
+}

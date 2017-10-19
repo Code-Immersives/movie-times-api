@@ -21,7 +21,6 @@ class Auth {
     }
   }
   static createToken ({email, lastName}) {
-    conosle.log(email)
     return jwt.sign({ email, lastName }, SECRET, { expiresIn: '1h' })
   }
 }
